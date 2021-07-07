@@ -8,11 +8,10 @@ import Home from "./components/Home";
 import SideBar from "./components/SideBar";
 import NavBar from "./components/NavBar";
 
-21721
 const ENDPOINT =
   process.env.NODE_ENV === 'production'
-    ? "http://localhost:21721"
-    : "http://localhost:3001";
+    ?  window.location.hostname
+    : 'https://localhost:3001';
 
 const socket = socketIOClient(ENDPOINT);
 
