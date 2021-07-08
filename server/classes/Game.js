@@ -12,7 +12,7 @@ module.exports = class Game {
         this.round = 0; 
         this.turn = 0; //koliko kart je bilo igranih
         this.type = 0; //tip igre ki se igra (berač, solo, ...)
-        this.suit = 0;
+        this.suit = "X";
         this.partner = 0;
     }
 
@@ -59,6 +59,7 @@ module.exports = class Game {
         this.startingPlayer = playerIndex;
         this.playerPlaying = playerIndex;
         this.pot = new Array(4);
+        this.suit = "X";
 
         this.dealCards();
     }
@@ -71,12 +72,16 @@ module.exports = class Game {
         }
 
         if(this.turn == 4) {
-            if(this.type < 5) {
+            if(this.type < 4) {
                 this.state = "choosingSuit";
                 this.turn = 0; 
             }
-            else { //no clue kaj bo kle
-                this.startingPlayer = socket.relativeId;
+            else if(this.type == 5) { //solo brez
+                game.partner = playerIndex;
+                updateClients("timeForCards", game.startingPlayer, 0, room);
+            }
+            else { //berač
+                this.startingPlayer = (playerIndex + 1) % 4; //vedno začne igralec na levi
                 updateClients("timeForCards", game.playerPlaying, 0, room);
             }
         }
@@ -156,10 +161,10 @@ module.exports = class Game {
         let partner = this.players[this.partner];
         let playerPlaying = this.players[this.playerPlaying];
 
-        if(this.type < 5) {
-            if(this.partner == this.playerPlaying) {
+        if(this.type < 6) {
+            if(this.partner == this.playerPlaying) { //igra sam
                 score = playerPlaying.pot.count() - border;
-                score = this.addGameValue(score);
+                score = this.addGameValue(score) + 10;
 
                 playerPlaying.score += score;
             }
@@ -171,9 +176,9 @@ module.exports = class Game {
                 playerPlaying.score += score;
             }
         }
-        else if(this.type == 5) {
-            if(success) score = 70;
-            else score = -70;
+        else if(this.type > 6) {
+            if(success) score = this.type * 10;
+            else score = -this.type * 10;
 
             playerPlaying.score += score;
         }

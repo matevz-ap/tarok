@@ -21,8 +21,9 @@ function GameChoiceComponent(props) {
         <button className="btn btn-success" onClick={() => gameChosen(1)}>3</button>
         <button className="btn btn-success" onClick={() => gameChosen(2)}>2</button>
         <button className="btn btn-success" onClick={() => gameChosen(3)}>1</button>
-        <button className="btn btn-success" onClick={() => gameChosen(4)}>Solo brez talona</button>
-        <button className="btn btn-success" onClick={() => gameChosen(5)}>berač</button>
+        <button className="btn btn-success" onClick={() => gameChosen(5)}>Solo brez talona</button>
+        <button className="btn btn-success" onClick={() => gameChosen(7)}>Berač</button>
+        <button className="btn btn-success" onClick={() => gameChosen(8)}>Odprti berač</button>
       </div>
     )
   }
