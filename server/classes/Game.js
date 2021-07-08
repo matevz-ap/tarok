@@ -63,6 +63,25 @@ module.exports = class Game {
         this.dealCards();
     }
 
+    gameChosen(chosenGame, playerIndex) {
+        this.turn++;
+        if(chosenGame > this.type) { //checks if the chosen game is more valuable then 
+            this.type = chosenGame;
+            this.playerPlaying = playerIndex;
+        }
+
+        if(this.turn == 4) {
+            if(this.type < 5) {
+                this.state = "choosingSuit";
+                this.turn = 0; 
+            }
+            else { //no clue kaj bo kle
+                this.startingPlayer = socket.relativeId;
+                updateClients("timeForCards", game.playerPlaying, 0, room);
+            }
+        }
+    }
+
     talonChosen(talon, playerIndex) {
         this.players[playerIndex].takeTalon(talon);
         for(const card of talon) {

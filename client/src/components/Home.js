@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function Home(props) {
 
+    const [error, setError] = useState(""); 
+
     let socket = props.socket;
     let history = useHistory();
+    var msg;
+
+    useEffect(() => {
+        socket.on("error", (error) => {
+            setError(error);
+        });
+        socket.on("validRoom", () => {
+            history.push("/game");
+        });
+    });
 
     function createGame(event) {
         let username = event.target.username.value;
-        socket.emit("createNewGame", username);
         history.push("/game");
+        socket.emit("createNewGame", username);
     }
 
     function joinGame(event) {
@@ -17,7 +29,16 @@ export default function Home(props) {
         let gameId = event.target.joinGameId.value;
         let username = event.target.username.value;
         socket.emit("joinGame", gameId, username);
-        history.push("/game");
+    }
+
+    if(error === "roomFull") {
+        msg = <div className="alert alert-danger" role="alert">Igra je polna</div>
+    }
+    else if(error === "notFound") {
+        msg = <div className="alert alert-danger" role="alert">Soba s tem ključem ne obstaja</div>
+    }
+    else {
+        msg = <></>;
     }
     
     return (
@@ -41,6 +62,7 @@ export default function Home(props) {
                     </form>
                 </div>
                 <div className="col border p-3">
+                    {msg}
                     <h3>Pridruži se igri</h3>
                     <form onSubmit={joinGame.bind(this)} className="text-center">
                         <div className="row">

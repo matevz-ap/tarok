@@ -19,7 +19,6 @@ export default function GameComponent(props) {
     const [gameState, setGameState] = useState("");
     const [gameType, setGameType] = useState(0);
     const [roomId, setRoomId] = useState("");
-    const [undefRoom, setUndefRoom] = useState(false);
     const [scores, setScores] = useState([]);
 
     let socket = props.socket;
@@ -29,12 +28,10 @@ export default function GameComponent(props) {
     useEffect(() => {
         socket.on("connected", () => {
             if(localStorage.getItem("roomId") != undefined) {
-                console.log(Number(getItemFromLocal("roomId")));
                 socket.emit("reconnect", getItemFromLocal("roomId"), getItemFromLocal("socketId"));
             }
         });
         socket.on("joinedRoom", (roomId, players) => {
-            console.log(socket.id);
             setRoomId(roomId);
             setPlayers(players);
             localStorage.setItem("roomId", roomId);
@@ -50,10 +47,6 @@ export default function GameComponent(props) {
             setTalon(talon);
             setPot(pot);
         });
-        socket.on("undefinedRoom", () => {
-            setUndefRoom(true);
-            console.log("undefined room");
-        });
         socket.on("handDealt", (turn, hand) => {
             setGameState("choosingGame");
             setHand(hand);
@@ -66,13 +59,12 @@ export default function GameComponent(props) {
             setGameType(game);
             setMyTurn(turn);
         });
-        socket.on("chooseSuit", () => {
+        socket.on("choosingSuit", (turn) => {
             setGameState("choosingSuit");
-            setMyTurn(true);
+            setMyTurn(turn);
         });
         socket.on("showTalon", (choosing, talon) => {
             setGameState("choosingTalon");
-            console.log(talon);
             setTalon(talon);
             setMyTurn(choosing);
         });
@@ -119,10 +111,6 @@ export default function GameComponent(props) {
         console.log("ready ",showReadyButton);
         socket.emit("ready");
         setReadyButton(false);
-    }
-
-    function home() {
-        history.push("/");
     }
   
     function getItemFromLocal(item) {

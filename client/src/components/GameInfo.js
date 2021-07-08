@@ -25,9 +25,8 @@ function GameInfo(props) {
     return(
         <>
             <div className="row">
-                <h2>Room Id: {props.roomId}</h2>
+                <h3>Room Id: {props.roomId}</h3>
             </div>
-            <h3>Players:</h3>
             <div className="row">   
                 {players}
             </div>

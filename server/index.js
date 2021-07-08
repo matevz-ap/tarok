@@ -38,10 +38,10 @@ function newGame(socket, username) {
 function joinRoom(socket, roomId, username) {
     const room = rooms[roomId]
     if (room == undefined) {
-        console.log("Undefined room ", room);
-        socket.emit("undefinedRoom");
+        socket.emit("error", "notFound");
     }
-    else {
+    else if(room.sockets.length < 4) { //room is not full yet
+        socket.emit("validRoom");
         socket.relativeId = room.sockets.length;
         socket.join(roomId);
         socket.roomId = roomId;
@@ -52,6 +52,9 @@ function joinRoom(socket, roomId, username) {
             client.emit('joinedRoom', roomId, room.game.getPlayerNames());
         }
         console.log(socket.id, "Joined", roomId);
+    }
+    else {
+        socket.emit('error', "roomFull");
     }
 }
 
@@ -150,25 +153,13 @@ io.on('connection', (socket) => {
         const room = rooms[socket.roomId];
         const game = room.game;
 
-        game.turn++;
-        if(chosenGame > game.type) { //checks if the chosen game is more valuable then 
-            game.type = chosenGame;
-            game.playerPlaying = socket.relativeId;
-        }
+        game.gameChosen(chosenGame, socket.relativeId);
 
         updateClients("gameChosen", game.getTurn(), chosenGame, room);
 
         if(game.turn == 4) {
-            if(game.type < 5) { //clean up
-                game.state = "choosingSuit";
-                room.sockets[game.playerPlaying].emit('chooseSuit');
-                game.turn = 0; 
-            }
-            else { //no clue kaj bo kle
-                game.startingPlayer = socket.relativeId;
-                updateClients("timeForCards", game.playerPlaying, 0, room);
-            }
-        }
+           updateClients(game.state, game.playerPlaying, 0, room); 
+        } 
     });
 
     socket.on('suitChosen', (suit) => {
