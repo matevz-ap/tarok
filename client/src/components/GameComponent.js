@@ -52,7 +52,6 @@ export default function GameComponent(props) {
             setHand(hand);
             setTalon(talon);
             setMyTurn(turn);
-            setScores([0, 0, 0, 0]);
             setReadyButton(false); 
         });
         socket.on("gameChosen", (turn, game) => {
@@ -88,7 +87,6 @@ export default function GameComponent(props) {
         });
         socket.on("gameOver", (turn, scores) => {
             setScores(scores);
-            console.log(scores);
         });
         socket.on('dis', (roomId, socketId) => {
             socket.removeAllListeners();
@@ -131,7 +129,7 @@ export default function GameComponent(props) {
             <GameChoiceComponent myTurn={myTurn} gameState={gameState} socket={socket}/>
         </div>
         <div className="text-center mt-3">
-            <SuitComponent gameState={gameState} socket={socket}/>
+            <SuitComponent gameState={gameState} myTurn={myTurn} socket={socket}/>
         </div>
         <div className="text-center">
             <TalonComponent gameState={gameState} talon={talon} gameType={gameType} myTurn={myTurn} socket={socket} />

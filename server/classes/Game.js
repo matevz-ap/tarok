@@ -38,7 +38,6 @@ module.exports = class Game {
 
     getTurn() { //returns index of player who's turn it is
         let turn = (this.startingPlayer + this.turn) % 4;
-        console.log(turn);
         return turn;
     }
 
@@ -77,12 +76,12 @@ module.exports = class Game {
                 this.turn = 0; 
             }
             else if(this.type == 5) { //solo brez
-                game.partner = playerIndex;
-                updateClients("timeForCards", game.startingPlayer, 0, room);
+                this.partner = playerIndex;
+                this.state = "timeForCards";
             }
             else { //berač
                 this.startingPlayer = (playerIndex + 1) % 4; //vedno začne igralec na levi
-                updateClients("timeForCards", game.playerPlaying, 0, room);
+                this.state = "timeForCards";
             }
         }
     }

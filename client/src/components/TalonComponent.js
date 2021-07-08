@@ -10,6 +10,7 @@ function TalonComponent(props) {
     let gameType = props.gameType;
 
     function chooseTalon(index) {
+        console.log(props.myTurn);
         if(props.myTurn) {
             socket.emit("talonChosen", index); 
         } 

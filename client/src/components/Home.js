@@ -35,7 +35,7 @@ export default function Home(props) {
         msg = <div className="alert alert-danger" role="alert">Igra je polna</div>
     }
     else if(error === "notFound") {
-        msg = <div className="alert alert-danger" role="alert">Soba s tem ključem ne obstaja</div>
+        msg = <div className="alert alert-danger" role="alert">Igra s tem ključem ne obstaja</div>
     }
     else {
         msg = <></>;

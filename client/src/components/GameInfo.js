@@ -1,6 +1,6 @@
 import React from "react";
 
-function GameInfo(props) {
+export default function GameInfo(props) {
     if(props.players.length > 0) {
         var players = props.players.map((username, index) => {
             return(
@@ -36,4 +36,3 @@ function GameInfo(props) {
         </>
     )
 }
-export default GameInfo;

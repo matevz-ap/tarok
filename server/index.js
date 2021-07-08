@@ -157,8 +157,8 @@ io.on('connection', (socket) => {
 
         updateClients("gameChosen", game.getTurn(), chosenGame, room);
 
-        if(game.turn == 4) {
-           updateClients(game.state, game.playerPlaying, 0, room); 
+        if(game.state == "choosingSuit") {
+            updateClients(game.state, game.playerPlaying, 0, room); 
         } 
     });
 
@@ -168,7 +168,7 @@ io.on('connection', (socket) => {
         game.suit = suit;
         game.state = "choosingTalon";
 
-        updateClients("showTalon", game.playerPlaying.relativeId, game.deck, room);
+        updateClients("showTalon", game.playerPlaying, game.deck, room);
     });
 
     socket.on('talonChosen', (index) => {
