@@ -37,7 +37,7 @@ export default function GameComponent(props) {
             localStorage.setItem("roomId", roomId);
             localStorage.setItem("socketId", socket.id); 
         });
-        socket.on("rejoinedRoom", (roomId, players, state, hand, game, talon, turn, pot) => {
+        socket.on("rejoinedRoom", (roomId, players, state, hand, game, talon, turn, pot, scoreList) => {
             setGameState(state);
             setRoomId(roomId);
             setPlayers(players);
@@ -46,6 +46,7 @@ export default function GameComponent(props) {
             setGameType(game);
             setTalon(talon);
             setPot(pot);
+            setScores(scoreList);
         });
         socket.on("handDealt", (turn, hand) => {
             setGameState("choosingGame");

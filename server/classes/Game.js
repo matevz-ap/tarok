@@ -14,6 +14,7 @@ module.exports = class Game {
         this.type = 0; //tip igre ki se igra (berač, solo, ...)
         this.suit = "X";
         this.partner = 0;
+        this.pagatUltimo = false;
     }
 
     newPlayer(id, name) {
@@ -59,6 +60,7 @@ module.exports = class Game {
         this.playerPlaying = playerIndex;
         this.pot = new Array(4);
         this.suit = "X";
+        this.pagatUltimo = false;
 
         this.dealCards();
     }
@@ -138,8 +140,11 @@ module.exports = class Game {
             }
             this.startingPlayer = winner;
             this.turn = 0;
-            this.round++;
             this.pot = new Array(4);
+            this.round++;
+
+            if(this.round > 11 && topCard.suit == "T" && topCard.value == 1) this.pagatUltimo = true;
+            
             return winner;
         }
         else { //implementacija za zmagovalca berača
@@ -162,13 +167,14 @@ module.exports = class Game {
 
         if(this.type < 6) {
             if(this.partner == this.playerPlaying) { //igra sam
-                score = playerPlaying.pot.count() - border;
+                score = playerPlaying.pot.count(this.pagatUltimo) - border;
                 score = this.addGameValue(score) + 10;
 
                 playerPlaying.score += score;
             }
             else {
-                score = partner.pot.count() + playerPlaying.pot.count() - border;
+                let jointPot = partner.pot.concat(playerPlaying.pot);
+                score = jointPot.count(this.pagatUltimo) - border;
                 this.addGameValue(score);
 
                 partner.score += score;

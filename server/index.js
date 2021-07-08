@@ -71,7 +71,7 @@ function rejoinRoom(socket, roomId, socketId) {
     room.sockets[playerIndex] = socket;
 
     socket.emit("rejoinedRoom", room.id, game.getPlayerNames(), game.state, 
-        player.hand.cards, game.type, game.deck, game.getTurn(), game.pot); 
+        player.hand.cards, game.type, game.deck, game.getTurn(), game.pot, game.getScores()); 
 }
 
 function startGame(room) {

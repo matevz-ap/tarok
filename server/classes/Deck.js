@@ -34,26 +34,35 @@ module.exports = class Deck {
         return this.cards.pop();
     }
 
-    count() {
+    count(pagatUltimo) {
         let res = 0;
         let strongCards = 0;
+        let kings = 0;
+        let trula = 0;
+
         for(let i = 0; i < this.cards.length - 2; i+=3) {
             let cards = this.cards.splice(i, 3);
-            console.log(cards);
             for(const card of cards) {
                 if(card.suit == "T") {
                     if([1, 21, 22].indexOf(card.value) > -1) {
                         res += 5;
                         strongCards += 1;
+                        trula++;
                     }
                 }
                 else if([5, 6, 7, 8].indexOf(card.value) > -1) {
                     res += card.value - 3;
                     strongCards += 1;
+                    if(card.value == 8) kings++;
                 }
                 if(strongCards > 1) res -= strongCards - 1;
                 else if(strongCards == 0) res = 1;
             }
+        }
+        if(res > 0) {
+            if(kings == 4) res += 10;
+            if(trula == 3) res += 10;  
+            if(pagatUltimo) res += 25;
         }
         return res
     }

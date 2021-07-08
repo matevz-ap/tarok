@@ -12,9 +12,8 @@ function NavBar(props) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                {/*
-                    <a className="nav-link active" aria-current="page" href="joinGame">Nova igra</a>
-                    <a className="nav-link" href="#">Test</a>
+                    <a className="nav-link active" aria-current="page" href="/">Domov</a>
+                {/*   <a className="nav-link" href="#">Test</a>
                     <a className="nav-link" href="#">Test</a> */}
                 </div>
                 </div>
