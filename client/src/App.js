@@ -7,6 +7,7 @@ import HandComponent from "./components/HandComponent";
 import Home from "./components/Home";
 import SideBar from "./components/SideBar";
 import NavBar from "./components/NavBar";
+import Profil from "./components/Profil";
 
 const ENDPOINT =
   process.env.NODE_ENV === 'production'
@@ -33,6 +34,10 @@ export default function App() {
           <Route
             path="/game"
             render={(props) => <GameComponent socket={socket} />}
+          />
+          <Route
+            path="/uporabnik"
+            render={(props) => <Profil socket={socket} />}
           />
         </div>
       </div>
