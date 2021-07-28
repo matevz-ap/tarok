@@ -107,9 +107,11 @@ export default function GameComponent(props) {
     }, []);
 
     function ready() {
-        console.log("ready ",showReadyButton);
-        socket.emit("ready");
-        setReadyButton(false);
+        if(players.length == 4) {
+            console.log("ready ",showReadyButton);
+            socket.emit("ready");
+            setReadyButton(false);
+        }
     }
   
     function getItemFromLocal(item) {
@@ -119,9 +121,9 @@ export default function GameComponent(props) {
     return (
         <>
         <div className="container overflow-hidden p-3">
-        <GameInfo roomId={roomId} players={players} scores={scores} />
+        <GameInfo roomId={roomId} players={players} scores={scores} gameType={gameType}/>
         <div>
-            <button className={showReadyButton ? '' : 'hidden'} onClick={ready} id="startGame">
+            <button className={showReadyButton ? 'btn btn-dark mt-2' : 'hidden'} onClick={ready} id="startGame">
             Start
             </button>
         </div>
