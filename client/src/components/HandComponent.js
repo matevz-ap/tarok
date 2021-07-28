@@ -109,9 +109,9 @@ function HandComponent(props) {
     }
     else {
         return (
-            <div className="row justify-content-center m-0">
+            <div className="container-fluid fixed-bottom p-0">
                 <div>{msg}</div>
-                <div className="row row-cols-6 row-cols-lg-auto justify-content-center g-1 hand">{handDiv}</div>
+                <div className="row flex-row flex-nowrap g-1 hand-wrapper">{handDiv}</div>
             </div>
         );
     }

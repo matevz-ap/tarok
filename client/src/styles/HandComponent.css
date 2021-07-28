@@ -1,3 +1,8 @@
 .handImg {
-    max-height: 200px;
+    height: 20vh;
+}
+
+.hand-wrapper{
+	overflow-x: auto;
+    bottom: 0;
 }
