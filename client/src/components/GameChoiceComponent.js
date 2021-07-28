@@ -17,13 +17,15 @@ function GameChoiceComponent(props) {
   }
   else {
     return (
-      <div className="btn-group">
-        <button className="btn btn-success" onClick={() => gameChosen(1)}>3</button>
-        <button className="btn btn-success" onClick={() => gameChosen(2)}>2</button>
-        <button className="btn btn-success" onClick={() => gameChosen(3)}>1</button>
-        <button className="btn btn-success" onClick={() => gameChosen(5)}>Solo brez talona</button>
-        <button className="btn btn-success" onClick={() => gameChosen(7)}>Berač</button>
-        <button className="btn btn-success" onClick={() => gameChosen(8)}>Odprti berač</button>
+      <div className="container">
+        <div className="d-grid gap-2 d-flex flex-wrap justify-content-center">
+          <button className="btn btn-success btn-lg" onClick={() => gameChosen(1)}>3</button>
+          <button className="btn btn-success btn-lg" onClick={() => gameChosen(2)}>2</button>
+          <button className="btn btn-success btn-lg" onClick={() => gameChosen(3)}>1</button>
+          <button className="btn btn-success btn-lg" onClick={() => gameChosen(5)}>Solo brez</button>
+          <button className="btn btn-success btn-lg" onClick={() => gameChosen(7)}>Berač</button>
+          <button className="btn btn-success btn-lg" onClick={() => gameChosen(8)}>Odprti berač</button>
+        </div>
       </div>
     )
   }
