@@ -2,7 +2,10 @@ import React from "react";
 
 export default function GameInfo(props) {
     let gameType = props.gameType;
+    let suit = props.suit;
+
     let game = "";
+    let suitIcon = <></>;
 
     if(props.players.length > 0) {
         var players = props.players.map((username, index) => {
@@ -25,34 +28,28 @@ export default function GameInfo(props) {
             );
         });
     }
-    switch (gameType) {
-        case 1:
-            game = "Tri";
-            break;
-        case 2:
-            game = "Dva";
-            break;
-        case 3:
-            game = "Ena";
-            break;
-        case 5:
-            game = "Solo brez";
-            break;
-        case 7:
-            game = "Berač";
-            break;
-        case 8:
-            game = "Odprti berač";
-            break;
-        default:
-            break;
-    }
+
+    //Displaying game name
+    if(gameType == 1) game = "Tri";
+    else if(gameType = 2) game = "Dva";
+    else if(gameType = 3) game = "Ena";
+    else if(gameType = 5) game = "Solo brez";
+    else if(gameType = 6) game = "Pikolo";
+    else if(gameType = 7) game = "Berač";
+    else if(gameType = 8) game = "Odprti berač";
+    else game = "Neznana igra";
+
+    //Displaying game suit
+    if(suit == "C") suitIcon = <i className="bi bi-suit-club-fill text-dark"></i>;
+    else if(suit == "D") suitIcon = <i className="bi bi-suit-diamond-fill text-danger"></i>;
+    else if(suit == "H") suitIcon = <i className="bi bi-suit-heart-fill text-danger"></i>;
+    else if(suit == "S") suitIcon = <i className="bi bi-suit-spade-fill text-dark"></i>;
 
     return(
         <>
             <div className="row">
                 <h3>Miza: {props.roomId}</h3>
-                <h4>Igra: {game}</h4>
+                <h4>Igra: {game} {suitIcon}</h4>
             </div>
             <div className="row g-1">   
                 {players}

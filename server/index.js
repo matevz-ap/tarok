@@ -168,6 +168,7 @@ io.on('connection', (socket) => {
         game.suit = suit;
         game.state = "choosingTalon";
 
+        updateClients("suitChosen", 0, suit, room);
         updateClients("showTalon", game.playerPlaying, game.deck, room);
     });
 

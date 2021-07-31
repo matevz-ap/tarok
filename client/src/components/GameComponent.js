@@ -18,6 +18,7 @@ export default function GameComponent(props) {
     const [myTurn, setMyTurn] = useState(false);
     const [gameState, setGameState] = useState("");
     const [gameType, setGameType] = useState(0);
+    const [suit, setSuit] = useState("");
     const [roomId, setRoomId] = useState("");
     const [scores, setScores] = useState([]);
 
@@ -62,6 +63,9 @@ export default function GameComponent(props) {
         socket.on("choosingSuit", (turn) => {
             setGameState("choosingSuit");
             setMyTurn(turn);
+        });
+        socket.on("suitChosen", (turn, suit) => {
+            setSuit(suit);
         });
         socket.on("showTalon", (choosing, talon) => {
             setGameState("choosingTalon");
@@ -121,7 +125,7 @@ export default function GameComponent(props) {
     return (
         <>
         <div className="container overflow-hidden p-3">
-        <GameInfo roomId={roomId} players={players} scores={scores} gameType={gameType}/>
+        <GameInfo roomId={roomId} players={players} scores={scores} gameType={gameType} suit={suit}/>
         <div>
             <button className={showReadyButton ? 'btn btn-dark mt-2' : 'hidden'} onClick={ready} id="startGame">
             Start
