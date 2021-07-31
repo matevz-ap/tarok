@@ -129,7 +129,7 @@ export default function GameComponent(props) {
         </div>
         <p>{myTurn ? 'Ti si na vrsti' : 'Nisi na vrsti'}</p>
         <div className="text-center">
-            <GameChoiceComponent myTurn={myTurn} gameState={gameState} socket={socket}/>
+            <GameChoiceComponent myTurn={myTurn} gameState={gameState} socket={socket} gameType={gameType}/>
         </div>
         <div className="text-center mt-3">
             <SuitComponent gameState={gameState} myTurn={myTurn} socket={socket}/>
