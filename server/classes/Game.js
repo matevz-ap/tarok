@@ -67,7 +67,8 @@ module.exports = class Game {
 
     gameChosen(chosenGame, playerIndex) {
         this.turn++;
-        if(chosenGame > this.type) { //checks if the chosen game is more valuable then 
+        //chosenGame == 100 when player skips game selection
+        if(chosenGame != 100 && chosenGame > this.type) { //checks if the chosen game is more valuable then 
             this.type = chosenGame;
             this.playerPlaying = playerIndex;
         }

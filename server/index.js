@@ -155,7 +155,7 @@ io.on('connection', (socket) => {
 
         game.gameChosen(chosenGame, socket.relativeId);
 
-        updateClients("gameChosen", game.getTurn(), chosenGame, room);
+        updateClients("gameChosen", game.getTurn(), game.type, room);
 
         if(game.state == "choosingSuit") {
             updateClients(game.state, game.playerPlaying, 0, room); 
