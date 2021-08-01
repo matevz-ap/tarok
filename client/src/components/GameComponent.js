@@ -5,6 +5,7 @@ import SuitComponent from "./SuitComponent";
 import PotComponent from "./PotComponent";
 import TalonComponent from "./TalonComponent";
 import GameInfo from "./GameInfo";
+import Turn from "./Turn";
 import { useHistory } from "react-router-dom";
 
 import "../styles/GameComponent.css";
@@ -124,7 +125,8 @@ export default function GameComponent(props) {
 
     return (
         <>
-        <div className="container overflow-hidden p-3">
+        <Turn myTurn={myTurn} />
+        <div className="container overflow-hidden px-2">
         <GameInfo roomId={roomId} players={players} scores={scores} gameType={gameType} suit={suit}/>
         <div>
             <button className={showReadyButton ? 'btn btn-dark mt-2' : 'hidden'} onClick={ready} id="startGame">

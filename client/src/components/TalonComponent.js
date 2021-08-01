@@ -66,7 +66,7 @@ function TalonComponent(props) {
 
             case 3:
                 return(
-                    <div className="row">
+                    <div className="row g-1">
                       <div className="col">
                         <img className="talon" src={getSrc(talon[0])} onClick={() => chooseTalon(talon[0])} alt="talonCard" />
                       </div>

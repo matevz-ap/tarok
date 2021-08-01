@@ -1,5 +1,7 @@
 import React from "react";
 
+import "../styles/GameInfo.css";
+
 export default function GameInfo(props) {
     let gameType = props.gameType;
     let suit = props.suit;
@@ -12,7 +14,7 @@ export default function GameInfo(props) {
             return(
                 <div className="col-3" key={index}>
                     <div className="card p-1 text-center">
-                        <h3>{username}</h3>
+                        <b className="username">{username}</b>
                     </div>
                 </div>
             );
@@ -48,8 +50,12 @@ export default function GameInfo(props) {
     return(
         <>
             <div className="row">
-                <h3>Miza: {props.roomId}</h3>
-                <h4>Igra: {game} {suitIcon}</h4>
+                <div className="col-6">
+                    <span className="gameInfo">{suitIcon} {game}</span>
+                </div>
+                <div className="col-6 text-end gameInfo">
+                    Miza: {props.roomId}
+                </div>
             </div>
             <div className="row g-1">   
                 {players}

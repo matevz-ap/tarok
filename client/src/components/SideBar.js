@@ -5,23 +5,23 @@ import "../styles/SideBar.css";
 function SideBar(props) {
     return (
         <div className="sidebar collapse d-flex flex-column flex-shrink-0 bg-dark" id="navbarToggleExternalContent">
-            <a href="/" className="d-block p-3 text-decoration-none text-center" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+            <a href="/" className="d-block text-decoration-none text-center" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
                 <img className="logo" src="/img/playing-cards.png" />
                 <span className="visually-hidden">Icon-only</span>
             </a>
             <ul className="nav nav-pills nav-flush flex-column mb-auto text-center">
                 <li className="nav-item">
-                    <a href="#" className="nav-link py-3" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                    <a href="#" className="nav-link" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
                     <i className="bi bi-suit-club color-success"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#" className="nav-link py-3" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+                    <a href="#" className="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                     <i className="bi bi-suit-club"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="joinGame" className="nav-link py-3" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="CreateGame">
+                    <a href="joinGame" className="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="CreateGame">
                     <i className="bi bi-plus-square-fill"></i>
                     </a>
                 </li>

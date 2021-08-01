@@ -1,1 +1,6 @@
 .hidden { display:none; }
+
+.progress {
+    width: 100%;
+    border-radius: 0% !important;
+}
